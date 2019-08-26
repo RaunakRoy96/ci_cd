@@ -34,7 +34,9 @@ node('master') {
      
     dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
    }
-   
+  stage('email') {
+    emailextrecipients([developers()])
+  }
    stage('docker deploy') {
        dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
    }
