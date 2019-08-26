@@ -29,10 +29,7 @@ node('master') {
     //     } 
    }
    stage('docker') {
-       //sh 'docker-compose up -d'
-    //   docker.withRegistry('https://registry-1.docker.io/v2/', '47f84f4d-ab54-4743-8250-875b54c8bab9') {
-    //         docker.build('raunakroy/springboot').push()
-    //   }
+      
     dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
    }
    
