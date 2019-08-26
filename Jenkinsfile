@@ -29,7 +29,7 @@ node('master') {
     //     } 
    }
    stage('docker') {
-      
+     
     dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
    }
    
