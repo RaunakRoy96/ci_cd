@@ -35,7 +35,7 @@ node('master') {
     dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
    }
   stage('email') {
-    emailextrecipients(['raunak.roy2@mindtree.com'])
+    //emailextrecipients(['raunak.roy2@mindtree.com'])
   }
    stage('docker deploy') {
        dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
