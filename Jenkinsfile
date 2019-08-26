@@ -18,7 +18,7 @@ node('master') {
         scmCheckout(this)
     }
     stage('sonar') {
-        //sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
+        sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
     }
    stage('build') {
        buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
