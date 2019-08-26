@@ -41,4 +41,3 @@ node('master') {
        dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
    }
 }
-
