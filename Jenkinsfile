@@ -8,6 +8,7 @@ jsl = library(
   )
 )
 
+
 imageNameWithUserid = 'raunakroy/springboot'
 credentials = '47f84f4d-ab54-4743-8250-875b54c8bab9'
 port1 = '8003'
@@ -37,4 +38,4 @@ node('master') {
        dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
    }
 }
-   
+
