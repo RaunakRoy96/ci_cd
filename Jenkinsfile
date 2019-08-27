@@ -19,6 +19,7 @@ node('master') {
     stage('pull') {
         scmCheckout(this)
     }
+  input "proceed?"
     stage('sonar') {
         sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
     }
