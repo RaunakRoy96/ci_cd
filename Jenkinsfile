@@ -19,7 +19,7 @@ node('master') {
     stage('pull') {
         scmCheckout(this)
     }
-  input "proceed?"
+  
     stage('sonar') {
         sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
     }
@@ -38,6 +38,9 @@ node('master') {
   stage('email') {
     //emailextrecipients(['raunak.roy2@mindtree.com'])
   }
+  
+  input "Proceed with deployment?"
+  
    stage('docker deploy') {
        dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
    }
