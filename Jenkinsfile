@@ -11,7 +11,7 @@ jsl = library(
 
 properties([
   parameters([
-    string(name: 'imageNameWithUserid', defaultValue: '47f84f4d-ab54-4743-8250-875b54c8bab9', description: '' ),
+    string(name: 'imageNameWithUserid', defaultValue: 'raunakroy/springboot', description: '' ),
     string(name: 'credentials', defaultValue: '47f84f4d-ab54-4743-8250-875b54c8bab9', description: '' ),
     string(name: 'port1', defaultValue: '8003', description: '' ),
     string(name: 'port2', defaultValue: '8080', description: '' ),
@@ -36,7 +36,7 @@ node('master') {
     dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
    }
   input "Proceed with deployment?"
-  
+
    stage('docker deploy') {
      deployWithAnsible(this, host)
     }
