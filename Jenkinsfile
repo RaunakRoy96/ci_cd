@@ -45,7 +45,12 @@ node('master') {
    stage('docker deploy') {
        //dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
      withCredentials([usernamePassword(credentialsId: '47f84f4d-ab54-4743-8250-875b54c8bab9', passwordVariable: 'dockerPassword', usernameVariable: 'dockerUsername')]) {
-      ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968',  playbook: 'DeployDocker.yml', extras: " --extra-vars HOST=${env.host} USERNAME=${env.dockerUsername} PASSWORD=${env.dockerPassword}"
+      ansiblePlaybook
+       credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968',  
+       playbook: 'DeployDocker.yml', 
+       extraVars: [
+         HOST:this.host USERNAME:env.dockerUsername PASSWORD:env.dockerPassword
+       ]
      }
    }
 }
