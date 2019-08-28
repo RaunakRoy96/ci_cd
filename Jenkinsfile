@@ -14,6 +14,7 @@ imageNameWithUserid = 'raunakroy/springboot'
 credentials = '47f84f4d-ab54-4743-8250-875b54c8bab9'
 port1 = '8003'
 port2 = '8080'
+host = 'dev'
 
 node('master') {
     stage('pull') {
@@ -42,7 +43,10 @@ node('master') {
   input "Proceed with deployment?"
   
    stage('docker deploy') {
-       dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
+       //dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
+     withCredentials([usernamePassword(credentialsId: '47f84f4d-ab54-4743-8250-875b54c8bab9', passwordVariable: 'dockerPassword', usernameVariable: '')]) {
+      ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968',  playbook: 'DeployDocker.yml', extraVars: [ HOST: host, USERNAME: dockerUsername, PASSWORD: passwordVariable]
+     }
    }
 }
 
