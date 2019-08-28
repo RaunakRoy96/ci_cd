@@ -17,30 +17,30 @@ port2 = '8080'
 host = 'dev'
 
 node('master') {
-    stage('pull') {
-        scmCheckout(this)
-    }
+  //   stage('pull') {
+  //       scmCheckout(this)
+  //   }
   
-    stage('sonar') {
-        sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
-    }
-   stage('build') {
-       buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
-    //   withMaven (
-    //     maven: 'MAVEN_HOME',
-    //     jdk: 'JDK 8') {
-    //     sh 'mvn clean install';
-    //     } 
-   }
-   stage('docker') {
+  //   stage('sonar') {
+  //       sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
+  //   }
+  //  stage('build') {
+  //      buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
+  //   //   withMaven (
+  //   //     maven: 'MAVEN_HOME',
+  //   //     jdk: 'JDK 8') {
+  //   //     sh 'mvn clean install';
+  //   //     } 
+  //  }
+  //  stage('docker') {
      
-    dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
-   }
-  stage('email') {
-    //emailextrecipients(['raunak.roy2@mindtree.com'])
-  }
+  //   dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
+  //  }
+  // stage('email') {
+  //   //emailextrecipients(['raunak.roy2@mindtree.com'])
+  // }
   
-  input "Proceed with deployment?"
+  // input "Proceed with deployment?"
   
    stage('docker deploy') {
        //dockerPullAndRun(this, this.imageNameWithUserid, this.credentials, this.port1, this.port2)
@@ -52,7 +52,7 @@ node('master') {
     //      HOST:this.host USERNAME:env.dockerUsername PASSWORD:env.dockerPassword
     //    ]
     //  }
-    ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968', playbook: 'another.yml
+    ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968', playbook: 'another.yml'
    }
 }
 
