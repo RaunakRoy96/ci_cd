@@ -59,7 +59,7 @@ node('master') {
        credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968',  
        playbook: 'DeployDocker.yml', 
        extraVars: [
-         HOST:this.host USERNAME:env.dockerUsername PASSWORD:env.dockerPassword
+         HOST:this.host, USERNAME:env.dockerUsername, PASSWORD:env.dockerPassword
        ])
     //ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968', playbook: 'DeployDocker.yml'
    }
