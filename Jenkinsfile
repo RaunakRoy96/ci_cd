@@ -50,6 +50,7 @@ node('master') {
         extraVar( 'USERNAME', env.dockerUsername, false)
         extraVar('PASSWORD', env.passwordVariable, false)
      }
+     }
    }
 }
 
