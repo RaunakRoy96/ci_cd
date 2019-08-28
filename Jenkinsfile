@@ -61,7 +61,7 @@ node('master') {
       //  extraVars: [
       //    HOST:this.host, USERNAME:env.dockerUsername, PASSWORD:env.dockerPassword
       //  ])
-      sh 'ansible-playbook DeployDocker.yml -i inventory.yml -vvvv --extra-vars "HOST=${this.host} USERNAME=${env.dockerUsername} PASSWORD=${env.dockerPassword}"'
+      sh 'ansible-playbook DeployDocker.yml -i inventory -vvvv --extra-vars "HOST=${this.host} USERNAME=${env.dockerUsername} PASSWORD=${env.dockerPassword}"'
     //ansiblePlaybook credentialsId: '43195002-dcf4-4397-bb78-adf4429b5968', playbook: 'DeployDocker.yml'
    }
     }
