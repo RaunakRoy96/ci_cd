@@ -9,8 +9,18 @@ jsl = library(
   )
 )
 
+properties([
+  parameters([
+    string(name: 'imageNameWithUserid', defaultValue: '47f84f4d-ab54-4743-8250-875b54c8bab9' )
+    string(name: 'credentials', defaultValue: '47f84f4d-ab54-4743-8250-875b54c8bab9' )
+    string(name: 'port1', defaultValue: '8003' )
+    string(name: 'port2', defaultValue: '8080' )
+    string(name: 'host', defaultValue: 'dev')
+   ])
+])
 
-imageNameWithUserid = 'raunakroy/springboot'
+
+imageNameWithUserid = '47f84f4d-ab54-4743-8250-875b54c8bab9'
 credentials = '47f84f4d-ab54-4743-8250-875b54c8bab9'
 port1 = '8003'
 port2 = '8080'
