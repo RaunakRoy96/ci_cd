@@ -25,17 +25,17 @@ node('master') {
         scmCheckout(this)
     }
   
-    stage('sonar') {
-        sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
-    }
-   stage('build') {
-       buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
-   }
-   stage('docker') {
+  //   stage('sonar') {
+  //       sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
+  //   }
+  //  stage('build') {
+  //      buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
+  //  }
+  //  stage('docker') {
      
-    dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
-   }
-  input "Proceed with deployment?"
+  //   dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
+  //  }
+  // input "Proceed with deployment?"
 
    stage('docker deploy') {
      deployWithAnsible(this, host)
