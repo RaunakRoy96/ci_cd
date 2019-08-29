@@ -21,25 +21,36 @@ properties([
 
 
 node('master') {
-    stage('pull') {
-        scmCheckout(this)
-    }
-  
-    stage('sonar') {
-        sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
-    }
-   stage('build') {
-       buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
-   }
-   stage('docker') {
-     
-    dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
-   }
-  input "Proceed with deployment?"
-
-   stage('docker deploy') {
-     deployWithAnsible(this, host)
-    }
+  try {
+      stage('pull') {
+          scmCheckout(this)
+      }
     
+      stage('sonar') {
+          sonarAnalysis this, 'JDK 8', 'MAVEN_HOME'
+      }
+    stage('build') {
+        buildWithMaven(this,  'JDK 8', 'MAVEN_HOME')
+    }
+    stage('docker') {
+      
+      dockerBuildAndPush(this, this.imageNameWithUserid, this.credentials)
+    }
+    input "Proceed with deployment?"
+
+    stage('docker deploy') {
+      deployWithAnsible(this, host)
+      }
+
+    stage('send notification') {
+        mail to: 'royraunak96@gmail.com', from: 'royraunak96@gmail.com',
+                  subject: "Build: ${env.JOB_NAME} - Success", 
+                  body: "Job Failed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}"
+    }
+  } catch() {
+    mail to: 'royraunak96@gmail.com', from: 'royraunak96@gmail.com',
+                  subject: "Build: ${env.JOB_NAME} - Failed", 
+                  body: "Job Failed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}"
+  }
 }
 
