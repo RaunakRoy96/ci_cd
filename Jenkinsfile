@@ -47,7 +47,7 @@ node('master') {
                   subject: "Build: ${env.JOB_NAME} - Success", 
                   body: "Job Failed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}"
     }
-  } catch() {
+  } catch(Exception e) {
     mail to: 'royraunak96@gmail.com', from: 'royraunak96@gmail.com',
                   subject: "Build: ${env.JOB_NAME} - Failed", 
                   body: "Job Failed - \"${env.JOB_NAME}\" build: ${env.BUILD_NUMBER}"
